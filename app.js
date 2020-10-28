@@ -1,20 +1,45 @@
 const express = require('express');
 const https = require('https');
+const bodyParser = require('body-parser');
 
 const app = express();
 
+app.use(bodyParser.urlencoded({extended:true}));
+
 app.get('/', function (req, res){
-    const url='https://api.openweathermap.org/data/2.5/weather?q=Bristol&appid=f98b6af9bbe15cb396066fac31665a54&units=metric';
+    res.sendFile(__dirname + '/index.html') 
+});
+
+app.post('/', function (req,res){
+   
     
+});
+
+    /* const query = 'Bristol';
+    const appKey = 'f98b6af9bbe15cb396066fac31665a54';
+    const unit = 'metric';
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${appKey}&units=${unit}`;
+    
+  
     https.get(url, function (response){
         // console.log(response);
         console.log('statusCode:', response.statusCode);
-        console.log('headers:', response.headers);
-    });
-    res.send('The weather app is running.');
-});
+        //console.log('headers:', response.headers);
 
+        response.on('data', function (data){
+                const weatherData = JSON.parse(data);
+                const temp = weatherData.main.temp;
+                const weatherDescription = weatherData.weather[0].description;
+                const icon = weatherData.weather[0].icon;
+                const imageUrl = 'http://openweathermap.org/img/wn/' + icon +'@2x.png';
+                console.log(weatherDescription);
 
+                res.write('<p> The weather is currently ' + weatherDescription + '. </p>');
+                res.write('<h1> The temperature in Bristol is ' + temp + ' degrees Celcius.</h1>');
+                res.write('<img src='+ imageUrl +'>');
+                res.send();
+        });
+    }); */
 
 
 app.listen(3005, function (){
