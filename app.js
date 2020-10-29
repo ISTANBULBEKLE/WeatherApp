@@ -11,20 +11,13 @@ app.get('/', function (req, res){
 });
 
 app.post('/', function (req,res){
-   
-    
-});
-
-    /* const query = 'Bristol';
+   const query = req.body.cityName;
     const appKey = 'f98b6af9bbe15cb396066fac31665a54';
     const unit = 'metric';
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${appKey}&units=${unit}`;
     
   
     https.get(url, function (response){
-        // console.log(response);
-        console.log('statusCode:', response.statusCode);
-        //console.log('headers:', response.headers);
 
         response.on('data', function (data){
                 const weatherData = JSON.parse(data);
@@ -35,12 +28,16 @@ app.post('/', function (req,res){
                 console.log(weatherDescription);
 
                 res.write('<p> The weather is currently ' + weatherDescription + '. </p>');
-                res.write('<h1> The temperature in Bristol is ' + temp + ' degrees Celcius.</h1>');
+                res.write('<h1> The temperature in '+ query +' is ' + temp + ' degrees Celcius.</h1>');
                 res.write('<img src='+ imageUrl +'>');
                 res.send();
         });
-    }); */
+    });
 
+    
+});
+
+   
 
 app.listen(3005, function (){
     console.log('The server is running on port 3005.')
